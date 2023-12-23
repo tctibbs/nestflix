@@ -1,0 +1,8 @@
+config/
+transcode/
+media/
+
+# Ignore other sensitive or unnecessary files
+*.log
+*.env
+*.DS_Store
