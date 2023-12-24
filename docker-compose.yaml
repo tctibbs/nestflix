@@ -13,7 +13,37 @@ services:
     volumes:
       - ./docker/plex/config:/config
       - ./docker/plex/transcode:/transcode
-      - ./media:/data
+      - ./media:/media
     ports:
       - "32400:32400"
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - ./docker/radarr/config:/config
+      - ./media:/media
+      - /Users/tristantibbs/Downloads:/downloads
+    ports:
+      - '7878:7878'
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - ./docker/sonarr/config:/config
+      - ./media:/media
+      - /Users/tristantibbs/Downloads:/downloads
+    ports:
+      - '8989:8989'
     restart: unless-stopped
